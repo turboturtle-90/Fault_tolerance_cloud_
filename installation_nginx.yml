@@ -1,0 +1,17 @@
+---
+- name: Установка и настройка Nginx
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Обновить кэш apt и установить nginx
+      apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+      
+  
+    - name: Убедиться, что nginx запущен и добавлен в автозагрузку
+      service:
+        name: nginx
+        state: started
+        enabled: yes
